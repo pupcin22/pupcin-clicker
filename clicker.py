@@ -44,7 +44,7 @@ def clicker():
     global clickpers
     global clickpower
     click += clickpower
-    btn["text"] = humanize.intword(click)
+    clickcount["text"] = f"{humanize.intword(click)} clicks"
     widget["text"] = f"click per second: {clickpers}\n click power: {clickpower}\n rebirth: {krebirth}"
 
 
@@ -53,7 +53,7 @@ def auto_click():
     global clickpers
     if clickpers > 0:
         click += clickpers
-        btn["text"] = humanize.intword(click)
+        clickcount["text"] = f"{humanize.intword(click)} clicks"
     root.after(1000, auto_click)
 
 
@@ -66,7 +66,7 @@ def buy1():
     if click >= value:
         click -= value
         clickpers += plusclickpers
-        btn["text"] = humanize.intword(click)
+        clickcount["text"] = f"{humanize.intword(click)} clicks"
         value *= mult
         buy1["text"] = f"+{plusclickpers} click per second: { humanize.intword(value)}"
         widget["text"] = f"click per second: {clickpers}\n click power: {clickpower}\n rebirth: {krebirth}"
@@ -82,7 +82,7 @@ def buy2():
     if click >= value2:
         click -= value2
         clickpower += 1
-        btn["text"] = humanize.intword(click)
+        clickcount["text"] = f"{humanize.intword(click)} clicks"
         value2 *= mult
         buy2["text"] = f"+1 click power {humanize.intword(value2)}"
         widget["text"] = f"click per second: {clickpers}\n click power: {clickpower}\n rebirth: {krebirth}"
@@ -98,7 +98,7 @@ def buy3():
     if click >= value3:
         click -= value3
         clickpers *= 2
-        btn["text"] = humanize.intword(click)
+        clickcount["text"] = f"{humanize.intword(click)} clicks"
         value3 *= 2 * mult
         buy3["text"] = f"double click per second: {humanize.intword(value3)}"
         widget["text"] = f"click per second: {clickpers}\n click power: {clickpower}\n rebirth: {krebirth}"
@@ -140,7 +140,7 @@ def rebirth():
         value3 = 1000
         value4 *= 10
 
-        btn["text"] = humanize.intword(click)
+        clickcount["text"] = f"{humanize.intword(click)} clicks"
         buy1["text"] = f"+{plusclickpers} click per second: { humanize.intword(value)}"
         buy2["text"] = f"+1 click power: {humanize.intword(value2)}"
         buy3["text"] = f"double click per second: {humanize.intword(value3)}"
@@ -149,8 +149,10 @@ def rebirth():
     else:
         print("Not enough clicks")
 
-#clickcount=
-btn = Button(tab1,text=humanize.intword(click),activeforeground="#F5EEDD",relief='sunken',activebackground="#06202B",fg="#F5EEDD",bg='#06202B',command=clicker)
+clickcount=Label(tab1,text=f"{humanize.intword(click)} clicks",fg="#F5EEDD",bg='#077A7D')
+clickcount.config(font=("Courier", 30))
+clickcount.place(anchor=CENTER, x=350, y=80)
+btn = Button(tab1,text="CLICK ME!",activeforeground="#F5EEDD",relief='sunken',activebackground="#06202B",fg="#F5EEDD",bg='#06202B',command=clicker)
 btn.config(font=("Courier", 30))
 btn.place(anchor=CENTER, x=350, y=150)
 buy1 = Button(tab2,text=f"+{plusclickpers} click per second: { humanize.intword(value)}",activeforeground="#F5EEDD",relief='sunken',activebackground="#06202B",fg="#F5EEDD",bg='#06202B',command=buy1)
