@@ -20,7 +20,6 @@ tab_color = '#009999'
 
 style = ttk.Style()
 style.theme_use('default') 
-
 style.configure('TNotebook', background=bg_color, borderwidth=0,tabposition='n')
 style.configure('TNotebook.Tab',background=tab_color,foreground='#F5EEDD',padding=[10, 20], font=('Courier', 10))
 style.map('TNotebook.Tab', background=[('selected', bg_color)])
