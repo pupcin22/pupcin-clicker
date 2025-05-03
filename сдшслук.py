@@ -1,8 +1,34 @@
 from tkinter import *
 import time
 import humanize
-
+from tkinter import ttk
+import tkinter as tk
 root = Tk()
+notebook = ttk.Notebook(root)
+
+# Створення фреймів для кожної вкладки
+tab1 = tk.Frame(notebook, bg='#077A7D') 
+tab2 = tk.Frame(notebook, bg='#077A7D')
+
+# Додавання фреймів до Notebook з підписами вкладок
+notebook.add(tab1, text='clicker')
+notebook.add(tab2, text='pursaches')
+notebook.pack(expand=True, fill='both')
+
+bg_color = '#077A7D'  # Колір фону вкладок і простору навколо
+tab_color = '#009999'  # Колір самих вкладок
+
+# 🔧 Стиль
+style = ttk.Style()
+style.theme_use('default')  # Потрібно, бо деякі теми ігнорують кольори
+
+style.configure('TNotebook', background=bg_color, borderwidth=0)
+style.configure('TNotebook.Tab',
+                background=tab_color,
+                foreground='white',
+                padding=[10, 5])
+style.map('TNotebook.Tab', background=[('selected', bg_color)])
+
 click = 0
 clickpers = 0
 value = 10
@@ -17,8 +43,6 @@ krebirth = 0
 root.title("Clicker")
 root.geometry("700x500")
 root.resizable(False, False)
-root["bg"] = "#077A7D"
-
 
 def clicker():
     global click
@@ -131,21 +155,21 @@ def rebirth():
         print("Not enough clicks")
 
 
-btn = Button(root,text=humanize.intword(click),activeforeground="#F5EEDD",relief='sunken',activebackground="#06202B",fg="#F5EEDD",bg='#06202B',command=clicker)
+btn = Button(tab1,text=humanize.intword(click),activeforeground="#F5EEDD",relief='sunken',activebackground="#06202B",fg="#F5EEDD",bg='#06202B',command=clicker)
 btn.config(font=("Courier", 30))
 btn.place(anchor=CENTER, x=350, y=150)
-buy1 = Button(root,text=f"+{plusclickpers} click per second: { humanize.intword(value)}",activeforeground="#F5EEDD",relief='sunken',activebackground="#06202B",fg="#F5EEDD",bg='#06202B',command=buy1)
+buy1 = Button(tab1,text=f"+{plusclickpers} click per second: { humanize.intword(value)}",activeforeground="#F5EEDD",relief='sunken',activebackground="#06202B",fg="#F5EEDD",bg='#06202B',command=buy1)
 buy1.place(anchor=CENTER, x=350, y=210)
-buy2 = Button(root,text=f"+1 click power: {humanize.intword(value2)}",activeforeground="#F5EEDD",relief='sunken',activebackground="#06202B",fg="#F5EEDD",bg='#06202B',command=buy2)
+buy2 = Button(tab1,text=f"+1 click power: {humanize.intword(value2)}",activeforeground="#F5EEDD",relief='sunken',activebackground="#06202B",fg="#F5EEDD",bg='#06202B',command=buy2)
 buy2.place(anchor=CENTER, x=350, y=240)
-buy3 = Button(root,text=f"double click per second: {humanize.intword(value3)}",activeforeground="#F5EEDD",relief='sunken',activebackground="#06202B",fg="#F5EEDD",bg='#06202B',command=buy3)
+buy3 = Button(tab1,text=f"double click per second: {humanize.intword(value3)}",activeforeground="#F5EEDD",relief='sunken',activebackground="#06202B",fg="#F5EEDD",bg='#06202B',command=buy3)
 buy3.place(anchor=CENTER, x=350, y=270)
-buy4 = Button(root,text=f"divide value multiple: 2 rebirth",activeforeground="#F5EEDD",relief='sunken',activebackground="#06202B",fg="#F5EEDD",bg='#06202B',command=buy4)
+buy4 = Button(tab1,text=f"divide value multiple: 2 rebirth",activeforeground="#F5EEDD",relief='sunken',activebackground="#06202B",fg="#F5EEDD",bg='#06202B',command=buy4)
 buy4.place(anchor=CENTER, x=350, y=300)
-rebirth = Button(root,text=f"rebirth: {humanize.intword(value4)}",activeforeground="#F5EEDD",relief='sunken',activebackground="#06202B",fg="#F5EEDD",bg='#06202B',command=rebirth)
-rebirth.place(anchor=CENTER, x=350, y=470)
-widget = Label(root,text=f"click per second: {clickpers}\n click power: {clickpower}\n rebirth: {krebirth}",fg="#F5EEDD",bg='#077A7D')
-widget.place(anchor=CENTER, x=350, y=420)
+rebirth = Button(tab1,text=f"rebirth: {humanize.intword(value4)}",activeforeground="#F5EEDD",relief='sunken',activebackground="#06202B",fg="#F5EEDD",bg='#06202B',command=rebirth)
+rebirth.place(anchor=CENTER, x=350, y=450)
+widget = Label(tab1,text=f"click per second: {clickpers}\n click power: {clickpower}\n rebirth: {krebirth}",fg="#F5EEDD",bg='#077A7D')
+widget.place(anchor=CENTER, x=350, y=50)
 
 auto_click()
 root.mainloop()
